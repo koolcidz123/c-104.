@@ -1,0 +1,35 @@
+#FOR MODE#!
+
+from collections import Counter
+import csv
+with open('SOCR-HeightWeight.csv', newline='') as f:
+    reader = csv.reader(f)
+    fileData = list(reader)
+fileData.pop(0)
+# print(fileData)
+
+height = []
+for i in range(len(fileData)):
+    num = fileData[i][1]
+    height.append(float(num))
+# print(height)
+
+data = Counter(height)
+modeData = {"50-60":0,"60-70":0,"70-80":0,"80-90":0}
+
+for height1, occurences in  data.items():
+    if 50<float(height1)<60:
+        modeData["50-60"] += occurences
+    elif 60<float(height1)<70:
+        modeData["60-70"] += occurences
+    elif 70<float(height1)<80:
+        modeData["70-80"] += occurences
+
+modeRanges, modeOccurrences =0,0
+
+for range,occurences in modeData.items():
+    if occurences > modeOccurrences:
+        modeRanges,modeOccurrences = [int(range.split("-")[0]),int(range.split("-")[1])], occurences
+mode = float((modeRanges[0] + modeRanges[1]) / 2)
+
+print (mode)

@@ -1,0 +1,21 @@
+#FOR MEAN#!
+
+import csv
+with open('SOCR-HeightWeight.csv', newline='') as f:
+    reader = csv.reader(f)
+    filedata = list(reader)
+filedata.pop(0)
+
+height = []
+for i in range(len(filedata)):
+    num = filedata[i][1]
+    height.append(float(num))
+#print (height)
+
+n = len(height)
+total = 0
+for x in height:
+    total = total + x
+mean = total / n
+
+print(mean)
